@@ -1,0 +1,8 @@
+Core Requirements for a Cybersecurity Lab
+1. Host System (Hardware)
+The host system is your physical computer that runs virtual machines (VMs). It must be powerful enough to handle multiple VMs simultaneously. 
+
+CPU: Minimum of a quad-core processor (e.g., Intel i5 or AMD Ryzen 5) with virtualization support (Intel VT-x or AMD-V). Recommended: 6–8+ cores with hyperthreading for smoother multitasking. 
+RAM: Minimum 16GB to run 2–3 VMs; 32GB or more is recommended for running 5+ VMs comfortably. 
+Storage: Minimum 512GB SSD for faster performance; 1TB+ SSD is ideal to store multiple VMs, snapshots, and tools. 
+Network Interface: Standard NIC is sufficient, but a managed switch enhances network simulation capabilities.
