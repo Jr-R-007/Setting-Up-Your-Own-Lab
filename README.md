@@ -1,14 +1,17 @@
 # Setting-Up-Your-Own-Lab
 
-This repository serves as a shared environment for setting up your own virtual lab where you  can set-up your own lab via shown steps and picturess where i instructed to need changes.
+This repository serves as a shared environment for setting up your own virtual lab. Follow the detailed steps and images provided to configure your lab based on standard cybersecurity practices.
 
 I have created lab based on my requirments of cybersecurity set-up 
 
-Includes:
-Kali linux - ATTACKING MACHINE
-Ubuntu - SERVER MACHINE
+Lab Environment Overview
+Attacking Machine: : kali linux
 
 
-## 🔐 Access & Permissions
-- All members can clone and open issues.
--FOLLOW THE GIVEN INSTRUCTION IN THE PARTICULAR MACHINE FOLDER
+Server Machine: : Ubuntu linux
+
+Victim Machine: :
+
+Hypervisor : Virtualbox
+
+
