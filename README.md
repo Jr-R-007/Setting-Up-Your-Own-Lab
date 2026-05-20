@@ -1,20 +1,14 @@
 # Setting-Up-Your-Own-Lab
 
-This repository serves as a shared environment for :inlineEntity{type="inline_entity" conversation="091ab94df7f9df517149f7d00eccb507f524" name="your&#32;lab&#32;or&#32;team"}. Below are instructions to set up and contribute effectively.
+This repository serves as a shared environment for setting up your own virtual lab where you  can set-up your own lab via shown steps and picturess where i instructed to need changes.
 
-## 🛠️ Repository Structure
-- `data/` – Raw and processed datasets
-- `scripts/` – Analysis and processing code
-- `manuscripts/` – Drafts and supplementary materials
-- `figures/` – Output visuals and plots
-- `docs/` – Documentation and protocols
+I have created lab based on my requirments of cybersecurity set-up 
+
+Includes:
+Kali linux - ATTACKING MACHINE
+Ubuntu - SERVER MACHINE
+
 
 ## 🔐 Access & Permissions
 - All members can clone and open issues.
-- Write access granted to core team members.
-- Personal folders: `scripts/users/yourname/`
-
-## 📦 Setup Instructions
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/yourorg/lab-repo.git   
+-FOLLOW THE GIVEN INSTRUCTION IN THE PARTICULAR MACHINE FOLDER
