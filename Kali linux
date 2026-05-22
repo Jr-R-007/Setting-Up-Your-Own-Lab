@@ -1,1 +1,102 @@
-
+Setting Up Kali Linux in VirtualBox (Step-by-Step)
+1. Prerequisites
+Before starting, ensure you have: A system with at least:
+8 GB RAM (4 GB minimum)
+50 GB free disk space
+Virtualization enabled in BIOS/UEFI
+Installed:
+Oracle VM VirtualBox
+Kali Linux ISO file
+2. Download Required Files
+a. Download VirtualBox  and Go to: https://www.virtualbox.org/⁠
+Download and install based on your OS
+b. Download Kali Linux ISO
+Go to: https://www.kali.org/get-kali/⁠�
+Download the Installer ISO or VirtualBox image
+3. Install VirtualBox
+Run the installer
+Follow on-screen instructions
+Install all required drivers
+Launch VirtualBox after installation
+4. Create a New Virtual Machine
+Open VirtualBox
+Click New
+Enter:
+Name: Kali Linux
+Type: Linux
+Version: Debian (64-bit)
+Click Next
+5. Allocate Memory (RAM)
+Minimum: 2048 MB
+Recommended: 4096 MB or more
+6. Create Virtual Hard Disk
+Select Create a virtual hard disk now
+Choose:
+File type: VDI (VirtualBox Disk Image)
+Storage: Dynamically allocated
+Set size:
+Minimum: 20 GB
+Recommended: 40–50 GB
+7. Attach Kali Linux ISO
+Select your VM → Click Settings
+Go to Storage
+Under Controller IDE:
+Click Empty disk icon
+Choose Kali Linux ISO file
+Click OK
+8. Configure Additional Settings (Recommended)
+a. Processor
+Go to System → Processor
+Set:
+2 CPUs (or more if available)
+b. Display
+Go to Display
+Set Video Memory to 128 MB
+c. Network
+Default: NAT (works fine)
+9. Start Installation
+Click Start
+Kali boot menu appears
+Select:
+Graphical Install
+10. Install Kali Linux
+Follow installer steps:
+Select language, region, keyboard layout
+Configure network (auto DHCP)
+Set:
+Hostname: kali
+Username & Password
+Disk partition:
+Choose Guided – use entire disk
+Confirm installation
+11. Install GRUB Bootloader
+Select Yes
+Choose the default disk
+12. Complete Installation
+Wait for installation to finish
+Remove ISO when prompted
+Restart VM
+13. Install Guest Additions (Important)
+Start Kali VM
+In VirtualBox menu:
+Devices → Insert Guest Additions CD
+Open terminal and run:
+Bash
+sudo apt update
+sudo apt install build-essential dkms linux-headers-$(uname -r)
+sudo mkdir /media/cdrom
+sudo mount /dev/cdrom /media/cdrom
+cd /media/cdrom
+sudo sh VBoxLinuxAdditions.run
+Reboot:
+Bash
+sudo reboot
+14. Verify Installation
+Login with your credentials
+Check:
+Full-screen mode works
+Clipboard sharing (optional)
+15. Optional Enhancements
+Enable Shared Clipboard
+Enable Drag and Drop
+Take a Snapshot for backup
