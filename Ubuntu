@@ -1,1 +1,62 @@
+Step-by-step instructions
+Download and install VirtualBox
+Visit the official VirtualBox website and download the installer for your operating system (Windows, macOS, or Linux). Run the installer with default settings. 
+Download Ubuntu ISO
+Go to the official Ubuntu website and download the latest long-term support (LTS) version of the desktop ISO for 64-bit systems.
+Create a new virtual machine
+Open VirtualBox, click New, and enter:
+Name: Ubuntu-GitHub-VM
+Type: Linux
+Version: Ubuntu (64-bit)
+Allocate memory (RAM)
+Assign at least 4096 MB (4 GB) of RAM. Adjust based on your host system’s available memory. 
+Create a virtual hard disk
+Choose Create a virtual hard disk now → VDI (VirtualBox Disk Image) → Dynamically allocated → Set size to 30 GB. 
+Mount the Ubuntu ISO
+Select the new VM, click Settings → Storage → Empty under Controller: IDE → Click the CD icon → Choose a disk file → Select your downloaded Ubuntu ISO. 
+Start the VM and install Ubuntu
+Click Start. The VM will boot from the ISO. Follow the installer:
+Select language
+Choose Erase disk and install Ubuntu
+Set username and password
+Complete installation and reboot (remove ISO when prompted) 
+Install Guest Additions (for better performance)
+After booting into Ubuntu:
+In VirtualBox menu, go to Devices → Insert Guest Additions CD Image
+Open terminal in Ubuntu and run:
+sudo apt update && sudo apt install build-essential dkms linux-headers-generic -y
+sudo /media/$USER/VBox_GAs_*/VBoxLinuxAdditions.run
 
+Reboot the VM.
+Install Git
+Open terminal and run:
+sudo apt install git -y
+
+Configure Git with GitHub
+Set your GitHub credentials:
+git config --global user.name "YourGitHubUsername"
+git config --global user.email "your-email@example.com"
+
+Set up SSH for GitHub
+Generate an SSH key:
+ssh-keygen -t ed25519 -C "your-email@example.com"
+
+Start the SSH agent and add your key:
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+
+Copy the public key:
+cat ~/.ssh/id_ed25519.pub
+
+Go to GitHub → Settings → SSH and GPG keys, click New SSH key, paste the key, and save. 
+Clone a GitHub repository
+Test the connection:
+ssh -T git@github.com
+
+Clone your repo:
+git clone git@github.com:username/your-repo.git
+
+Optional: Enable GitHub CLI
+Install GitHub CLI:
+sudo apt install gh -y
+gh auth login
