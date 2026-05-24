@@ -1,1 +1,58 @@
+VMware Workstation Pro or Player installed (version 17.x or later).
+ISO files:
+Kali Linux: kali-linux-2023.4-vmware-amd64.7z or newer.
+Ubuntu: ubuntu-24.04-desktop-amd64.iso or equivalent.
+Minimum system resources:
+16 GB RAM (8 GB per VM recommended).
+50+ GB free disk space.
+4+ CPU cores.
+Step-by-step instructions
+Install VMware Workstation
+Download from VMware’s official site or use terminal:
+wget https://download3.vmware.com/software/WKST-1750-LX/VMware-Workstation-Full-17.5.0-22583795.x86_64.bundle
+chmod +x VMware-Workstation-Full-*.bundle
+sudo ./VMware-Workstation-Full-*.bundle
 
+Create a New Virtual Machine
+Open VMware → File → New Virtual Machine → Choose "Typical" → Select "Installer disc image file (iso)" → Browse and select your Kali or Ubuntu ISO. 
+Set Guest OS Type
+For Kali: Select Linux → Debian 12.x 64-bit.
+For Ubuntu: Select Linux → Ubuntu 64-bit. 
+Name and Location
+Set VM name (e.g., Kali-Pentest, Ubuntu-Dev) and choose storage path. 
+Disk Capacity
+Allocate at least 30 GB for Kali, 40 GB for Ubuntu.  Choose "Store as a single file".
+Customize Hardware (Optional)
+Increase RAM to 4–8 GB, CPUs to 2–4 cores, and add a network adapter (Bridged or NAT). 
+Finish and Power On
+Click Finish → Power on the VM to start OS installation. 
+Install the OS
+Follow on-screen steps:
+For Kali: Default credentials are kali/kali.
+For Ubuntu: Create your user and password. 
+Install VMware Tools (Open VM Tools)
+After OS install:
+sudo apt update
+sudo apt install open-vm-tools open-vm-tools-desktop -y
+
+Reboot the VM.
+Enable Shared Folders
+In VMware:
+Go to VM → Settings → Options → Shared Folders → Enable and add host folder.
+In guest (Linux), mount using:
+sudo mkdir -p /mnt/hgfs
+sudo vmhgfs-fuse .host:/ /mnt/hgfs -o allow_other
+
+Auto-mount at boot: Add to /etc/fstab:
+.host:/ /mnt/hgfs fuse.vmhgfs-fuse defaults,allow_other 0 0
+
+Post-Setup Updates
+Update both systems:
+sudo apt update && sudo apt upgrade -y
+
+Secure Boot (if on Linux host)
+If modules fail, sign vmmon and vmnet:
+openssl req -new -x509 -newkey rsa:2048 -keyout VMWARE.priv -outform DER -out VMWARE.der -nodes -days 36500 -subj "/CN=VMWARE/"
+sudo /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 ./VMWARE.priv ./VMWARE.der $(modinfo -n vmmon)
+sudo /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 ./VMWARE.priv ./VMWARE.der $(modinfo -n vmnet)
+sudo mokutil --import VMWARE.der
