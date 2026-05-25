@@ -1,1 +1,51 @@
+Setting up Android OS as a virtual machine in VMware Workstation for use as a victim machine in security testing or GitHub repository experimentation requires using an x86-compatible Android build such as Android-x86 or Bliss OS. Standard ARM-based Android images will not run on PC virtualization platforms like VMware without significant emulation overhead.  The key is to use a lightweight, x86-optimized Android distribution, allocate sufficient hardware resources (especially CPU and RAM), and configure boot parameters correctly to avoid graphical issues. 
 
+
+Android-x86
+Mobile device Linux distribution
+Wikipedia
+android-x86.org
+Android-x86
+Prerequisites
+VMware Workstation (Pro or Player) installed
+An x86-compatible Android ISO (e.g., from android-x86.org or Bliss OS)
+Minimum 4 GB RAM on host; 8 GB+ recommended
+At least 20 GB free disk space
+Virtualization enabled in BIOS/UEFI (Intel VT-x or AMD-V) 
+Step-by-step instructions
+Open VMware Workstation and click Create a New Virtual Machine
+Choose Typical (recommended) setup
+Select I will install the operating system later
+Choose Other > Other 64-bit as the OS type
+Name the VM (e.g., "Android-Victim") and set a storage location
+Allocate at least 4 GB RAM and 2 CPU cores
+Set virtual disk size to 20 GB or more, stored as a single file
+Complete the wizard, then go to VM Settings > Processors
+Enable Virtualize Intel VT-x/EPT or AMD-V/RVI
+Optionally enable 3D graphics acceleration under Display settings
+Mount the Android ISO: Go to CD/DVD (SATA) > Use ISO image file and browse to your downloaded Android-x86 ISO
+Power on the VM
+At the boot menu, select Install Android-x86 to harddisk
+Choose Create/Modify partitions, then use cfdisk to:
+Create a New Primary partition
+Make it Bootable
+Write the changes and Quit
+Select the new partition and choose ext4 as the filesystem → Confirm with Yes
+When prompted, install the GRUB bootloader → Yes
+Choose No for read-write system (keeps system intact across reboots)
+After installation, go to VM > Removable Devices > CD/DVD > Disconnect to eject the ISO
+Reboot the VM
+At the GRUB menu, press e to edit boot parameters
+Find the line starting with kernel and replace quiet with:
+nomodeset xforcevesa
+
+Press Enter, then b to boot
+Android should now start with GUI
+To make the fix permanent:
+After boot, open terminal (Alt+F1)
+Run: mount -o remount,rw /
+Edit GRUB config: vi /grub/menu.lst
+Add nomodeset xforcevesa to the kernel line
+Save with :wq, then reboot
+Configure network: Use Ethernet with DHCP enabled
+Optionally create a snapshot in VMware for easy reset (ideal for victim machine use)
