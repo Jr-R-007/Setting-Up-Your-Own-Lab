@@ -1,156 +1,101 @@
-# ========================================
-# OS-Specific Files
-# ========================================
-.DS_Store           # macOS
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db         # Windows
-Thumbs.db
+# -----------------------------------------------------------
+# .gitignore for Cybersecurity Virtual Lab
+# Repository: Setting-Up-Your-Own-Lab
+# -----------------------------------------------------------
 
-# ========================================
-# Editor & IDE Files
-# ========================================
-# VS Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
+# --- VirtualBox Specifics ---
+# Ignore suspended state files (contain RAM dumps)
+*.sav
+*.vmsn
 
-# Vim
+# Ignore log files generated during runtime
+*.log
+VBox.log
+VBoxHardening.log
+
+# Ignore temporary files
+*.tmp
+*.tgz
+
+# --- Virtual Disk Images (CRITICAL: These are huge) ---
+# Ignore dynamic and fixed disk images
+*.vdi
+*.vmdk
+*.vhd
+*.vhdx
+*.qcow2
+
+# Ignore disk descriptor files if they contain absolute host paths
+# (Keep .vmdk text descriptors if you use them, but ignore the data flats)
+*-flat.vmdk
+
+# --- Snapshots ---
+# Snapshots contain full state changes and are often large
+Snapshots/
+*/Snapshots/
+*.vbox-prev
+
+# --- OS Specific Artifacts ---
+
+# Kali Linux / Ubuntu / General Linux
 *~
 .swp
-.netrwhist
-backup/
-tmp/
+.swo
+.DS_Store
+Thumbs.db
+.cache/
+.trash/
+*.bak
 
-# Emacs
-*~
-\#*\#
-/.emacs.desktop
-/.emacs.desktop.lock
-.elc
-auto-save-list/
-tramp
-.\#*
+# Android-x86 / Genymotion
+android-data/
+data.img
+userdata.qcow2
+cache.qcow2
+adbkey
+adbkey.pub
 
-# IntelliJ / PyCharm / Other JetBrains IDEs
-.idea/
-*.iml
-*.iws
-*.ipr
-out/
-build/
-target/
-
-# Sublime Text
-*.sublime-project
-*.sublime-workspace
-.sublime
-
-# ========================================
-# Environment & Dependency Files
-# ========================================
-# Virtual environments
-venv/
-env/
-ENV/
-.venv/
-env.bak/
-venv.bak/
-
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-.pytest_cache/
-.coverage
-htmlcov/
-.tox/
-.nox/
-dist/
-build/
-*.egg-info/
-*.egg
-
-# Node.js
-node_modules/
-npm-debug.log
-yarn-error.log
-yarn-debug.log
-.pnpm-debug.log
-*.pnp.js
-
-# Ruby
-.bundle/
-Gemfile.lock
-.ruby-version
-
-# Java
-*.class
-*.jar
-*.war
-*.ear
-hs_err_pid*
-
-# ========================================
-# Logs & Databases
-# ========================================
-*.log
-*.sql
-*.sqlite
-logs
-*.cache
-
-# ========================================
-# Build & Distribution
-# ========================================
-dist/
-out/
-build/
-coverage/
-nyc_output/
-
-# ========================================
-# Secrets & Configuration
-# ========================================
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-secrets.yml
-config/secrets.yml
+# --- Sensitive Data & Credentials ---
+# Never commit SSH keys or password files
+id_rsa
+id_rsa.pub
+authorized_keys
 *.pem
 *.key
-*.crt
+.secrets
+credentials.json
+access_keys.json
+config.ini
+*.conf.local
 
-# ========================================
-# CI/CD & Tools
-# ========================================
-.dockerignore
-.gitlab-ci.yml
-.travis.yml
-.circleci/
-.github/workflows/*.yml
+# --- Network Configuration (Host-Specific) ---
+# VirtualBox Host-Only network UUIDs change per host
+VirtualBox.xml
+network-config-host-only.conf
 
-# ========================================
-# Local Development
-# ========================================
-localhost.key
-localhost.crt
+# --- Build & Compilation ---
+# If you compile custom kernels or tools
+*.o
+*.ko
+bin/
+obj/
+__pycache__/
+*.pyc
 
-# ========================================
-# Lab-Specific Artifacts (Customize as Needed)
-# ========================================
-# Example: Ignore local device configs
-/device_configs/*
-!/device_configs/example_template.cfg  # Keep template
+# --- Documentation Build ---
+# If you generate PDFs or HTML from markdown
+docs/_build/
+*.pdf
 
-# Ignore lab reports if locally generated
-lab_reports/
+# --- IDE / Editor ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
-# Ignore temporary network configs
-/tmp_network/   
+# --- Keep these files (Examples) ---
+# Uncomment if you accidentally ignored them above
+# !README.md
+# !setup.sh
+# !docs/   
